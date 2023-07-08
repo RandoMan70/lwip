@@ -470,6 +470,12 @@ ip6_input_accept(struct netif *netif)
 {
   /* interface is up? */
   if (netif_is_up(netif)) {
+#if LWIP_GREEDY_NETIF
+    /* is it greedy interface ?*/
+    if (netif->greedy) {
+      return 1;
+    }
+#endif /* LWIP_GREEDY_NETIF */
     u8_t i;
     /* unicast to this interface address? address configured? */
     /* If custom scopes are used, the destination zone will be tested as

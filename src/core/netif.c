@@ -306,6 +306,10 @@ netif_add(struct netif *netif,
   LWIP_ERROR("netif_add: invalid netif", netif != NULL, return NULL);
   LWIP_ERROR("netif_add: No init function given", init != NULL, return NULL);
 
+#if LWIP_GREEDY_NETIF
+  netif->greedy = 0;
+#endif /* LWIP_GREEDY_NETIF */
+
 #if LWIP_IPV4
   if (ipaddr == NULL) {
     ipaddr = ip_2_ip4(IP4_ADDR_ANY);
