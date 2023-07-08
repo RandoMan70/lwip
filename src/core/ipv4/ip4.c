@@ -415,6 +415,12 @@ ip4_input_accept(struct netif *netif)
 
   /* interface is up and configured? */
   if ((netif_is_up(netif)) && (!ip4_addr_isany_val(*netif_ip4_addr(netif)))) {
+#if LWIP_GREEDY_NETIF
+    /* is it greedy interface ?*/
+    if (netif->greedy) {
+      return 1;
+    }
+#endif /* LWIP_GREEDY_NETIF */
     /* unicast to this interface address? */
     if (ip4_addr_eq(ip4_current_dest_addr(), netif_ip4_addr(netif)) ||
         /* or broadcast on this interface network address? */

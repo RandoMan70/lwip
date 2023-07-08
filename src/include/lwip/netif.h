@@ -403,6 +403,10 @@ struct netif {
   u8_t reschedule_poll;
 #endif /* LWIP_NETIF_LOOPBACK_MULTITHREADING */
 #endif /* ENABLE_LOOPBACK */
+#if LWIP_GREEDY_NETIF
+  /* Enable greedy mode for interface - treat all packets as send for us */
+  u8_t greedy;
+#endif /* LWIP_GREEDY_NETIF */
 };
 
 #if LWIP_CHECKSUM_CTRL_PER_NETIF
